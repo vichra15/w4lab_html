@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Exercises — Starter</title>
+<style>
+  :root{
+    --ink:#1c2430;
+    --muted:#5b6572;
+    --line:#e3e7ec;
+    --bg:#f6f7f9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    padding:24px 5% 60px;
+  }
+  .bp-badge{
+    position:fixed; top:10px; right:10px;
+    background:var(--ink); color:#fff;
+    font-size:12px; font-weight:600;
+    padding:6px 12px; border-radius:999px;
+    z-index:10;
+  }
+  h1{font-size:22px;}
+  h2{font-size:16px; margin-top:56px; border-top:1px solid var(--line); padding-top:32px;}
+  p.sub{color:var(--muted); font-size:14px; margin-top:-6px;}
+
+  .instructions{
+    background:#fff;
+    border:1px dashed #b9c0c9;
+    border-radius:10px;
+    padding:14px 16px;
+    font-size:13.5px;
+    line-height:1.5;
+    color:#39424d;
+    margin-bottom:20px;
+  }
+  .instructions strong{color:var(--ink);}
+  .instructions code{
+    background:#eef0f3;
+    padding:1px 5px;
+    border-radius:4px;
+    font-size:12.5px;
+  }
+    /* =========================================================
+     EXERCISE 1: Responsive Profile Card
+     GOAL: Build a small card with an avatar, name, and bio
+     that stays centered and never grows wider than 320px.
+     ========================================================= */
+  .profile-card{
+    /* TODO 1a: limit how wide this card can grow.
+       Hint: use max-width so it doesn't stretch on large screens. */
+    max-width: 100%;
+
+    /* TODO 1b: make sure it can still shrink on small screens */
+    width: 100%;
+
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    text-align:center;
+  }
+  .profile-card img{
+    max-width: 100%;
+    height: auto;
+
+    /* TODO 1c: make the avatar perfectly circular */
+    border-radius: 100%;
+
+    width: 96px;
+  }
+  .profile-card h3{margin: 0.75rem 0 0.25rem; font-size:1.1rem;}
+  .profile-card p{margin:0; color:var(--muted); font-size:0.9rem; line-height:1.4;}
+   /* =========================================================
+     EXERCISE 2: 4-Box Grid with Breakpoints
+     GOAL: Show the 4 boxes as:
+       - 1 column on mobile   (default)
+       - 2 columns on tablet  (>= 768px)
+       - 4 columns on desktop (>= 1024px)
+     ========================================================= */
+  .four-grid{
+    display:grid;
+
+    /* TODO 2a: mobile default — one column */
+    grid-template-columns: 1fr;
+
+    gap:16px;
+    max-width: 900px;
+  }
+
+  /* TODO 2b: add the tablet breakpoint (min-width: 768px)
+     and set grid-template-columns to 2 equal columns */
+  @media (min-width: 768px){
+    .four-grid{ grid-template-columns: repeat(2,1fr); }
+  }
+
+  /* TODO 2c: add the desktop breakpoint (min-width: 1024px)
+     and set grid-template-columns to 4 equal columns */
+  @media (min-width: 1024px){
+    .four-grid{ grid-template-columns: repeat(4,1fr);
+        max-width: 100%; }
+  }
+
+  .four-grid .box{
+    height:100px;
+    border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font-weight:700;
+  }
+  .b1{background:#2f6fed;}
+  .b2{background:#e8695c;}
+  .b3{background:#1a9c6b;}
+  .b4{background:#a05fd8;}
+
+  /* =========================================================
+     EXERCISE 3: Responsive Navbar
+     GOAL: On mobile, show only the brand + a hamburger button.
+     On tablet/desktop (>= 768px), show the nav links instead
+     of the hamburger button.
+     ========================================================= */
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 20px;
+    max-width:100%;
+  }
+  .navbar .brand{font-weight:700;}
+
+  .nav-links{
+    /* TODO 3a: hidden by default on mobile */
+    display: block;
+    gap:20px;
+    font-size:14px;
+    color:var(--muted);
+  }
+  .menu-btn{
+    /* TODO 3b: visible by default on mobile */
+    display: none;
+    width:32px; height:32px;
+    align-items:center; justify-content:center;
+    border:1px solid var(--line);
+    border-radius:8px;
+    background:none;
+  }
+
+  /* TODO 3c: at 768px and up, flip the visibility —
+     show .nav-links (as flex) and hide .menu-btn */
+  @media (max-width: 768px){
+    .nav-links{ display: none; }
+    .menu-btn{ display: block; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bp-badge" id="bpBadge">—</div>
+
+<h1>Week 4 Exercise Solutions</h1>
+<p class="sub">Resize the window to see each solution respond at 768px and 1024px.</p>
+
+<h2>Exercise 1 — Responsive Profile Card</h2>
+<div class="instructions">
+  <strong>Task:</strong> Complete the <code>.profile-card</code> rules in the CSS above so the card
+  never grows past a comfortable reading width, but still shrinks to fit small screens.<br>
+  <strong>You need to fill in:</strong> <code>TODO 1a</code>, <code>TODO 1b</code> is already given as a hint, <code>TODO 1c</code>.<br>
+  <strong>Check yourself:</strong> at very wide screens the card should stop growing; the avatar should be a perfect circle, not a square.
+</div>
+<div class="profile-card">
+  <img src="https://res.cloudinary.com/zpoqx6kp/image/upload/v1788927284/photo_2026-09-09_11-12-45.jpg" alt="avatar">
+  <h3>Brorn Munyvichra</h3>
+  <p>Frontend developer who likes clean layouts and strong coffee.</p>
+</div>
+
+<h2>Exercise 2 — 4-Box Grid with Breakpoints</h2>
+<div class="instructions">
+  <strong>Task:</strong> Make the 4 colored boxes below rearrange themselves as the screen resizes:
+  <br>• Mobile (default): 1 column, boxes stacked
+  <br>• Tablet (≥ 768px): 2 columns
+  <br>• Desktop (≥ 1024px): 4 columns in a row
+  <br><strong>You need to fill in:</strong> <code>TODO 2a</code>, <code>TODO 2b</code>, <code>TODO 2c</code>.
+  <br><strong>Hint:</strong> <code>grid-template-columns: repeat(N, 1fr);</code> creates N equal columns.
+</div>
+<div class="four-grid">
+  <div class="box b1">Box 1</div>
+  <div class="box b2">Box 2</div>
+  <div class="box b3">Box 3</div>
+  <div class="box b4">Box 4</div>
+</div>
+
+<h2>Exercise 3 — Responsive Navbar</h2>
+<div class="instructions">
+  <strong>Task:</strong> On mobile, only the brand name and the ☰ button should be visible.
+  On tablet/desktop, swap that out for the full list of nav links instead of the button.
+  <br><strong>You need to fill in:</strong> <code>TODO 3a</code>, <code>TODO 3b</code>, <code>TODO 3c</code>.
+  <br><strong>Hint:</strong> "hidden" usually means <code>display: none;</code>, and the nav links need
+  <code>display: flex;</code> when shown so they line up horizontally.
+</div>
+<nav class="navbar">
+  <span class="brand">MySite</span>
+  <div class="nav-links">
+    <span>Home</span>
+    <span>About</span>
+    <span>Services</span>
+    <span>Contact</span>
+  </div>
+  <button class="menu-btn">☰</button>
+</nav>
+
+<script>
+  // Small helper so students can see which breakpoint is currently active.
+  // No need to edit this — it's just for your own testing.
+  const badge = document.getElementById('bpBadge');
+  function updateBadge(){
+    const w = window.innerWidth;
+    if (w >= 1024) badge.textContent = 'Desktop (≥1024px)';
+    else if (w >= 768) badge.textContent = 'Tablet (768–1023px)';
+    else badge.textContent = 'Mobile (<768px)';
+  }
+  window.addEventListener('resize', updateBadge);
+  updateBadge();
+</script>
+
+</body>
+</html>
